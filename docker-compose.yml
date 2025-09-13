@@ -1,0 +1,33 @@
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:17
+    container_name: springboot_pgsql
+    restart: always
+    environment:
+      POSTGRES_DB: ：ㄆe_commerce       # 資料庫名稱
+      POSTGRES_USER: cheng          # 使用者名稱
+      POSTGRES_PASSWORD: 123456     # 密碼
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - springboot_net
+
+  adminer:
+    image: adminer
+    container_name: springboot_adminer
+    restart: always
+    ports:
+      - "8081:8080"
+    networks:
+      - springboot_net
+
+volumes:
+  db_data:
+
+networks:
+  springboot_net:
+    driver: bridge
